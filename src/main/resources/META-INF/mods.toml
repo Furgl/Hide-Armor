@@ -22,10 +22,10 @@ displayName="Hide Armor" #mandatory
 # A URL for the "homepage" for this mod, displayed in the mod UI
 displayURL="https://www.curseforge.com/minecraft/mc-mods/hide-armor" #optional
 # A file name (in the root of the mod JAR) containing a logo for display
-logoFile="assets/hidearmor/hide_armor_logo.png" #optional
+logoFile="hide_armor_logo.png" #optional
 # A text field displayed in the mod UI
 credits="Jason - for the idea and for encouraging/forcing me to make this into a public mod" #optional
 # A text field displayed in the mod UI
 authors="Furgl" #optional
 # The description text for the mod (multi line!) (#mandatory)
-description='''Allows you to hide your armor and/or other players' armor'''
+description='''Allows you to hide your armor and/or other player's armor'''
