@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "furgl.hideArmor.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+  ],
+  "client": [
+    "RenderArmorMixin",
+    "RenderGuiMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
