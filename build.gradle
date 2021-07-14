@@ -6,8 +6,8 @@ plugins {
 sourceCompatibility = JavaVersion.VERSION_16
 targetCompatibility = JavaVersion.VERSION_16
 
-archivesBaseName = "HideArmor"
-version = "Fabric-1.17.1-2.0"
+archivesBaseName = "Hide Armor"
+version = "Fabric-1.17.1-2.1"
 group ="furgl.hideArmor"
 
 repositories {
