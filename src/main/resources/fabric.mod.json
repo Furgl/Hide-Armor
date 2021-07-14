@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "hidearmor",
-  "version": "2.0",
+  "version": "2.1",
 
   "name": "Hide Armor",
   "description": "Allows you to hide your armor and/or other player's armor!",
@@ -14,7 +14,7 @@
     "sources": "https://github.com/Furgl/Hide-Armor"
   },
 
-  "license": "All Rights Reserved",
+  "license": "The MIT License (MIT)",
   "icon": "assets/hidearmor/hide_armor_logo.png",
 
   "environment": "client",
