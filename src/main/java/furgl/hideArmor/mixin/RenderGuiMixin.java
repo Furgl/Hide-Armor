@@ -87,6 +87,7 @@ public abstract class RenderGuiMixin extends AbstractInventoryScreen<PlayerScree
 		// button to expand
 		this.button = new TexturedButtonWidget(0, 0, 18, 18, 72, 0, 18, BUTTONS, 128, 128, (button) -> {
 			Config.expandedGui = !Config.expandedGui;
+			Config.writeToFile();
 			// hide/show buttons
 			if (Config.expandedGui) {
 				for (ToggleableButtonWidget button2 : hideYourArmorButtons)
@@ -101,6 +102,7 @@ public abstract class RenderGuiMixin extends AbstractInventoryScreen<PlayerScree
 					button2.visible = false;
 			}
 		});
+		this.button.visible = Config.showGuiButton;
 		this.addButton(this.button);
 		// reset button positions
 		this.resetButtonPositions();
@@ -129,7 +131,7 @@ public abstract class RenderGuiMixin extends AbstractInventoryScreen<PlayerScree
 	}
 
 	private void resetButtonPositions() {
-		this.button.setPos(this.x + 143, this.height / 2 - 22);
+		this.button.setPos(this.x + 143 + Config.guiButtonXOffset, this.height / 2 - 22 + Config.guiButtonYOffset);
 		for (int i=0; i<this.hideYourArmorButtons.size(); ++i) {
 			int x = this.x+this.backgroundWidth+17;
 			int y = this.y+i*21+24;

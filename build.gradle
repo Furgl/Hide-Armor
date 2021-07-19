@@ -7,7 +7,7 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 archivesBaseName = "Hide Armor"
-version = "Fabric-1.16.5-2.1"
+version = "Fabric-1.16.5-2.2"
 group ="furgl.hideArmor"
 
 repositories {
