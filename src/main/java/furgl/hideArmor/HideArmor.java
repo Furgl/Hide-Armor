@@ -8,9 +8,7 @@ import net.fabricmc.api.ClientModInitializer;
 public class HideArmor implements ClientModInitializer {
 	
 	/*** Changelog
-	 * Added Open Gui keybind
-	 * Added /hidearmor reload to reload config
-	 * Added config options to move or hide the inventory button
+	 * 
 	 */
 
 	public static final String MODNAME = "Hide Armor";
@@ -22,5 +20,5 @@ public class HideArmor implements ClientModInitializer {
 		KeyBindOpenGui.init();
 		ReloadCommand.init();
 	}
-
+	
 }

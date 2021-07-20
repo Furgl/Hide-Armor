@@ -1,8 +1,11 @@
 package furgl.hideArmor.gui;
 
 
+import java.util.ArrayList;
+
 import com.mojang.blaze3d.systems.RenderSystem;
 
+import furgl.hideArmor.config.Config;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.TexturedButtonWidget;
 import net.minecraft.client.render.GameRenderer;
@@ -11,6 +14,9 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 public class ToggleableButtonWidget extends TexturedButtonWidget {
+	
+	public static ArrayList<ToggleableButtonWidget> hideYourArmorButtons;
+	public static ArrayList<ToggleableButtonWidget> hideOtherPlayersArmorButtons;
 
 	private boolean toggled;
 	private Identifier texture;
@@ -53,6 +59,24 @@ public class ToggleableButtonWidget extends TexturedButtonWidget {
 		drawTexture(matrices, this.x, this.y, (float)this.u, (float)i, this.width, this.height, this.textureWidth, this.textureHeight);
 		if (this.isHovered()) 
 			this.renderTooltip(matrices, mouseX, mouseY);
+	}
+	
+	public static void toggleExpandedGui() {
+		Config.expandedGui = !Config.expandedGui;
+		Config.writeToFile();
+		// hide/show buttons
+		if (Config.expandedGui) {
+			for (ToggleableButtonWidget button2 : ToggleableButtonWidget.hideYourArmorButtons)
+				button2.visible = true;
+			for (ToggleableButtonWidget button2 : ToggleableButtonWidget.hideOtherPlayersArmorButtons)
+				button2.visible = true;
+		}
+		else {
+			for (ToggleableButtonWidget button2 : ToggleableButtonWidget.hideYourArmorButtons)
+				button2.visible = false;
+			for (ToggleableButtonWidget button2 : ToggleableButtonWidget.hideOtherPlayersArmorButtons)
+				button2.visible = false;
+		}
 	}
 
 }

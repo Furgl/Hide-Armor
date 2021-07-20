@@ -1,7 +1,5 @@
 package furgl.hideArmor.mixin;
 
-import java.util.ArrayList;
-
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -40,8 +38,6 @@ public abstract class RenderGuiMixin extends AbstractInventoryScreen<PlayerScree
 	Identifier BUTTONS = new Identifier(HideArmor.MODID, "textures/gui/buttons.png");
 	Identifier BACKGROUND = new Identifier(HideArmor.MODID, "textures/gui/background.png");
 	TexturedButtonWidget button;
-	ArrayList<ToggleableButtonWidget> hideYourArmorButtons;
-	ArrayList<ToggleableButtonWidget> hideOtherPlayersArmorButtons;
 
 	public RenderGuiMixin(PlayerScreenHandler screenHandler, PlayerInventory playerInventory, Text text) {
 		super(screenHandler, playerInventory, text);
@@ -50,8 +46,8 @@ public abstract class RenderGuiMixin extends AbstractInventoryScreen<PlayerScree
 	@Inject(method = "init", at = @At("RETURN"))
 	private void onInit(CallbackInfo ci) {
 		// buttons
-		hideYourArmorButtons = Lists.newArrayList();
-		hideOtherPlayersArmorButtons = Lists.newArrayList();
+		ToggleableButtonWidget.hideYourArmorButtons = Lists.newArrayList();
+		ToggleableButtonWidget.hideOtherPlayersArmorButtons = Lists.newArrayList();
 		for (int i=0; i<Utils.ARMOR_SLOTS.size(); ++i) {
 			EquipmentSlot slot = Utils.ARMOR_SLOTS.get(i);
 			// hide your armor
@@ -64,7 +60,7 @@ public abstract class RenderGuiMixin extends AbstractInventoryScreen<PlayerScree
 						(((ToggleableButtonWidget) button).isToggled() ? Formatting.RED+"Hiding" : Formatting.GREEN+"Showing")+
 						Formatting.WHITE+" your "+Utils.ARMOR_SLOT_INFO.get(slot).nameSingular), mouseX, mouseY);
 			}, LiteralText.EMPTY);
-			hideYourArmorButtons.add(toggle);
+			ToggleableButtonWidget.hideYourArmorButtons.add(toggle);
 			toggle.visible = Config.expandedGui;
 			if (Config.hideYourArmor.get(slot).booleanValue())
 				toggle.toggle();
@@ -79,7 +75,7 @@ public abstract class RenderGuiMixin extends AbstractInventoryScreen<PlayerScree
 						(((ToggleableButtonWidget) button).isToggled() ? Formatting.RED+"Hiding" : Formatting.GREEN+"Showing")+
 						Formatting.WHITE+" other player's "+Utils.ARMOR_SLOT_INFO.get(slot).namePlural), mouseX, mouseY);
 			}, LiteralText.EMPTY);
-			hideOtherPlayersArmorButtons.add(toggle);
+			ToggleableButtonWidget.hideOtherPlayersArmorButtons.add(toggle);
 			toggle.visible = Config.expandedGui;
 			if (Config.hideOtherPlayerArmor.get(slot).booleanValue())
 				toggle.toggle();
@@ -87,21 +83,7 @@ public abstract class RenderGuiMixin extends AbstractInventoryScreen<PlayerScree
 		}
 		// button to expand
 		this.button = new TexturedButtonWidget(0, 0, 18, 18, 72, 0, 18, BUTTONS, 128, 128, (button) -> {
-			Config.expandedGui = !Config.expandedGui;
-			Config.writeToFile();
-			// hide/show buttons
-			if (Config.expandedGui) {
-				for (ToggleableButtonWidget button2 : hideYourArmorButtons)
-					button2.visible = true;
-				for (ToggleableButtonWidget button2 : hideOtherPlayersArmorButtons)
-					button2.visible = true;
-			}
-			else {
-				for (ToggleableButtonWidget button2 : hideYourArmorButtons)
-					button2.visible = false;
-				for (ToggleableButtonWidget button2 : hideOtherPlayersArmorButtons)
-					button2.visible = false;
-			}
+			ToggleableButtonWidget.toggleExpandedGui();
 		});
 		this.button.visible = Config.showGuiButton;
 		this.addDrawableChild(this.button);
@@ -134,12 +116,11 @@ public abstract class RenderGuiMixin extends AbstractInventoryScreen<PlayerScree
 
 	private void resetButtonPositions() {
 		this.button.setPos(this.x + 143 + Config.guiButtonXOffset, this.height / 2 - 22 + Config.guiButtonYOffset);
-		for (int i=0; i<this.hideYourArmorButtons.size(); ++i) {
+		for (int i=0; i<ToggleableButtonWidget.hideYourArmorButtons.size(); ++i) {
 			int x = this.x+this.backgroundWidth+17;
 			int y = this.y+i*21+24;
-			this.hideYourArmorButtons.get(i).setPos(x, y);
-			this.hideOtherPlayersArmorButtons.get(i).setPos(x+25, y);
+			ToggleableButtonWidget.hideYourArmorButtons.get(i).setPos(x, y);
+			ToggleableButtonWidget.hideOtherPlayersArmorButtons.get(i).setPos(x+25, y);
 		}
 	}
-
 }
