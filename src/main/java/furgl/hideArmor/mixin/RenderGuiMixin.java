@@ -25,6 +25,7 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.screen.PlayerScreenHandler;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 
@@ -37,7 +38,7 @@ public abstract class RenderGuiMixin extends AbstractInventoryScreen<PlayerScree
 	Identifier BUTTONS = new Identifier(HideArmor.MODID, "textures/gui/buttons.png");
 	Identifier BACKGROUND = new Identifier(HideArmor.MODID, "textures/gui/background.png");
 	TexturedButtonWidget button;
-	
+
 	public RenderGuiMixin(PlayerScreenHandler screenHandler, PlayerInventory playerInventory, Text text) {
 		super(screenHandler, playerInventory, text);
 	}
@@ -55,9 +56,13 @@ public abstract class RenderGuiMixin extends AbstractInventoryScreen<PlayerScree
 				Config.hideYourArmor.put(slot, ((ToggleableButtonWidget) button).isToggled());
 				Config.writeToFile();
 			}, (button, matrices, mouseX, mouseY) -> {
-				this.renderTooltip(matrices, Text.of(
-						(((ToggleableButtonWidget) button).isToggled() ? Formatting.RED+"Hiding" : Formatting.GREEN+"Showing")+
-						Formatting.WHITE+" your "+Utils.ARMOR_SLOT_INFO.get(slot).nameSingular), mouseX, mouseY);
+				this.renderTooltip(matrices, 
+						(((ToggleableButtonWidget) button).isToggled() ?  
+								new TranslatableText("gui.hidearmor.hiding").formatted(Formatting.RED) : 
+									new TranslatableText("gui.hidearmor.showing").formatted(Formatting.GREEN))
+						.append(" ")
+						.append(new TranslatableText("gui.hidearmor.your", Utils.ARMOR_SLOT_INFO.get(slot).nameSingular).formatted(Formatting.WHITE)),
+						mouseX, mouseY);
 			}, LiteralText.EMPTY);
 			ToggleableButtonWidget.hideYourArmorButtons.add(toggle);
 			toggle.visible = Config.expandedGui;
@@ -70,9 +75,13 @@ public abstract class RenderGuiMixin extends AbstractInventoryScreen<PlayerScree
 				Config.hideOtherPlayerArmor.put(slot, ((ToggleableButtonWidget) button).isToggled());
 				Config.writeToFile();
 			}, (button, matrices, mouseX, mouseY) -> {
-				this.renderTooltip(matrices, Text.of(
-						(((ToggleableButtonWidget) button).isToggled() ? Formatting.RED+"Hiding" : Formatting.GREEN+"Showing")+
-						Formatting.WHITE+" other player's "+Utils.ARMOR_SLOT_INFO.get(slot).namePlural), mouseX, mouseY);
+				this.renderTooltip(matrices, 
+						(((ToggleableButtonWidget) button).isToggled() ?  
+								new TranslatableText("gui.hidearmor.hiding").formatted(Formatting.RED) : 
+									new TranslatableText("gui.hidearmor.showing").formatted(Formatting.GREEN))
+						.append(" ")
+						.append(new TranslatableText("gui.hidearmor.others", Utils.ARMOR_SLOT_INFO.get(slot).namePlural).formatted(Formatting.WHITE)),
+						mouseX, mouseY);
 			}, LiteralText.EMPTY);
 			ToggleableButtonWidget.hideOtherPlayersArmorButtons.add(toggle);
 			toggle.visible = Config.expandedGui;
@@ -94,7 +103,7 @@ public abstract class RenderGuiMixin extends AbstractInventoryScreen<PlayerScree
 	private void onDrawForeground(MatrixStack matrices, int mouseX, int mouseY, CallbackInfo ci) {
 		if (Config.expandedGui) 
 			// draw text
-			drawCenteredText(matrices, textRenderer, Formatting.WHITE+"Hide Armor", this.backgroundWidth+40, 12, 16777215);
+			drawCenteredText(matrices, textRenderer, new TranslatableText("hidearmor.name").formatted(Formatting.WHITE), this.backgroundWidth+40, 12, 16777215);
 	}
 
 	@Inject(method = "drawBackground", at = @At("HEAD"))
@@ -102,7 +111,7 @@ public abstract class RenderGuiMixin extends AbstractInventoryScreen<PlayerScree
 		if (Config.expandedGui) {
 			// draw background
 			RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-			this.client.getTextureManager().bindTexture(this.BACKGROUND);
+		    this.client.getTextureManager().bindTexture(this.BACKGROUND);
 			this.drawTexture(matrices, x+this.backgroundWidth+2, this.y, 0, 0, 75, 117);
 		}
 	}
@@ -121,5 +130,4 @@ public abstract class RenderGuiMixin extends AbstractInventoryScreen<PlayerScree
 			ToggleableButtonWidget.hideOtherPlayersArmorButtons.get(i).setPos(x+25, y);
 		}
 	}
-
 }

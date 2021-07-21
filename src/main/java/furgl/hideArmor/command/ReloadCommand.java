@@ -4,7 +4,7 @@ import furgl.hideArmor.config.Config;
 import net.fabricmc.fabric.api.client.command.v1.ClientCommandManager;
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 
 public class ReloadCommand {
@@ -16,7 +16,7 @@ public class ReloadCommand {
 					.then(ClientCommandManager.literal("reload")
 					.executes(context -> {
 						Config.init();	
-						MinecraftClient.getInstance().player.sendMessage(Text.of(Formatting.GREEN+"Reloaded Hide Armor"), false);
+						MinecraftClient.getInstance().player.sendMessage(new TranslatableText("command.reload.success").formatted(Formatting.GREEN), false);
 						return 1;
 					})));
 		});

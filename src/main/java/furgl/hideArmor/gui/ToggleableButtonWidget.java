@@ -17,7 +17,7 @@ public class ToggleableButtonWidget extends TexturedButtonWidget {
 
 	public static ArrayList<ToggleableButtonWidget> hideYourArmorButtons;
 	public static ArrayList<ToggleableButtonWidget> hideOtherPlayersArmorButtons;
-	
+
 	private boolean toggled;
 	private Identifier texture;
 	private int u;
@@ -60,7 +60,7 @@ public class ToggleableButtonWidget extends TexturedButtonWidget {
 		if (this.isHovered()) 
 			this.renderToolTip(matrices, mouseX, mouseY);
 	}
-	
+
 	public static void toggleExpandedGui() {
 		Config.expandedGui = !Config.expandedGui;
 		Config.writeToFile();

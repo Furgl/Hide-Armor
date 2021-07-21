@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "hidearmor",
-  "version": "2.3",
+  "version": "2.4",
 
   "name": "Hide Armor",
   "description": "Allows you to hide your armor and/or other player's armor!",
@@ -21,6 +21,9 @@
   "entrypoints": {
     "client": [
       "furgl.hideArmor.HideArmor"
+    ],
+    "modmenu": [
+        "furgl.hideArmor.config.ModMenuIntegration"
     ]
   },
   "mixins": [
