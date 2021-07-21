@@ -13,7 +13,7 @@ public class KeyBindOpenGui {
 
 	public static void init() { 
 		keyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-				"Open/Toggle Gui", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_O, HideArmor.MODNAME 
+				"key.hidearmor.openInventoryMenu", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_O, HideArmor.MODNAME 
 				));
 	}
 

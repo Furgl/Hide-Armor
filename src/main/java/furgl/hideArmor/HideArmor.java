@@ -8,7 +8,8 @@ import net.fabricmc.api.ClientModInitializer;
 public class HideArmor implements ClientModInitializer {
 	
 	/*** Changelog
-	 * 
+	 * Added in-game config
+	 * Added localization
 	 */
 
 	public static final String MODNAME = "Hide Armor";
