@@ -8,7 +8,9 @@
   "client": [
     "RenderArmorMixin",
     "RenderGuiMixin",
-    "KeyBindMixin"
+    "KeyBindMixin",
+    "ElytraFeatureRendererMixin",
+    "HeadFeatureRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

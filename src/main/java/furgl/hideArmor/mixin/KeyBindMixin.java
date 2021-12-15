@@ -23,7 +23,7 @@ public abstract class KeyBindMixin {
 			// open gui
 			if (client.currentScreen == null) {
 				Config.expandedGui = true;
-				client.openScreen(new InventoryScreen(client.player));
+				client.setScreen(new InventoryScreen(client.player));
 			}
 			// toggle expanded gui
 			else if (client.currentScreen instanceof InventoryScreen) {
