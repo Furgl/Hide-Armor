@@ -2,6 +2,7 @@ package furgl.hideArmor.mixin;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -36,8 +37,11 @@ public abstract class RenderGuiMixin extends AbstractInventoryScreen<PlayerScree
 	@Shadow
 	RecipeBookWidget recipeBook;
 
+	@Unique
 	Identifier BUTTONS = new Identifier(HideArmor.MODID, "textures/gui/buttons.png");
+	@Unique
 	Identifier BACKGROUND = new Identifier(HideArmor.MODID, "textures/gui/background.png");
+	@Unique
 	TexturedButtonWidget button;
 
 	public RenderGuiMixin(PlayerScreenHandler screenHandler, PlayerInventory playerInventory, Text text) {
