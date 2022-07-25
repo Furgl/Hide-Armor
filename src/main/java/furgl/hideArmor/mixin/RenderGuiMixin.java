@@ -25,9 +25,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.screen.PlayerScreenHandler;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 
@@ -62,13 +60,13 @@ public abstract class RenderGuiMixin extends AbstractInventoryScreen<PlayerScree
 				Config.writeToFile();
 			}, (button, matrices, mouseX, mouseY) -> {
 				this.renderTooltip(matrices, 
-						(((ToggleableButtonWidget) button).isToggled() ?  
-								new TranslatableText("gui.hidearmor.hiding").formatted(Formatting.RED) : 
-									new TranslatableText("gui.hidearmor.showing").formatted(Formatting.GREEN))
+						(((ToggleableButtonWidget) button).isToggled() ?
+								Text.translatable("gui.hidearmor.hiding").formatted(Formatting.RED) :
+									Text.translatable("gui.hidearmor.showing").formatted(Formatting.GREEN))
 						.append(" ")
-						.append(new TranslatableText("gui.hidearmor.your", Utils.ARMOR_SLOT_INFO.get(slot).nameSingular).formatted(Formatting.WHITE)),
+						.append(Text.translatable("gui.hidearmor.your", Utils.ARMOR_SLOT_INFO.get(slot).nameSingular).formatted(Formatting.WHITE)),
 						mouseX, mouseY);
-			}, LiteralText.EMPTY);
+			}, Text.empty());
 			ToggleableButtonWidget.hideYourArmorButtons.add(toggle);
 			toggle.visible = Config.expandedGui;
 			if (Config.hideYourArmor.get(slot).booleanValue())
@@ -81,13 +79,13 @@ public abstract class RenderGuiMixin extends AbstractInventoryScreen<PlayerScree
 				Config.writeToFile();
 			}, (button, matrices, mouseX, mouseY) -> {
 				this.renderTooltip(matrices, 
-						(((ToggleableButtonWidget) button).isToggled() ?  
-								new TranslatableText("gui.hidearmor.hiding").formatted(Formatting.RED) : 
-									new TranslatableText("gui.hidearmor.showing").formatted(Formatting.GREEN))
+						(((ToggleableButtonWidget) button).isToggled() ?
+								Text.translatable("gui.hidearmor.hiding").formatted(Formatting.RED) :
+								Text.translatable("gui.hidearmor.showing").formatted(Formatting.GREEN))
 						.append(" ")
-						.append(new TranslatableText("gui.hidearmor.others", Utils.ARMOR_SLOT_INFO.get(slot).namePlural).formatted(Formatting.WHITE)),
+						.append(Text.translatable("gui.hidearmor.others", Utils.ARMOR_SLOT_INFO.get(slot).namePlural).formatted(Formatting.WHITE)),
 						mouseX, mouseY);
-			}, LiteralText.EMPTY);
+			}, Text.empty());
 			ToggleableButtonWidget.hideOtherPlayersArmorButtons.add(toggle);
 			toggle.visible = Config.expandedGui;
 			if (Config.hideOtherPlayerArmor.get(slot).booleanValue())
@@ -108,7 +106,7 @@ public abstract class RenderGuiMixin extends AbstractInventoryScreen<PlayerScree
 	private void onDrawForeground(MatrixStack matrices, int mouseX, int mouseY, CallbackInfo ci) {
 		if (Config.expandedGui) 
 			// draw text
-			drawCenteredText(matrices, textRenderer, new TranslatableText("hidearmor.name").formatted(Formatting.WHITE), this.backgroundWidth+40, 12, 16777215);
+			drawCenteredText(matrices, textRenderer, Text.translatable("hidearmor.name").formatted(Formatting.WHITE), this.backgroundWidth+40, 12, 16777215);
 	}
 
 	@Inject(method = "drawBackground", at = @At("HEAD"))

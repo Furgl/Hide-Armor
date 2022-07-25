@@ -7,7 +7,9 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.MutableText;
+import net.minecraft.text.Text;
+
 
 public class Utils {
 
@@ -25,14 +27,14 @@ public class Utils {
 	
 	public static class Info {
 		
-		public TranslatableText nameSingular;
-		public TranslatableText namePlural;
+		public MutableText nameSingular;
+		public MutableText namePlural;
 
 		private Info(String nameSingular, String namePlural) {
-			this.nameSingular = new TranslatableText("misc.hidearmor.singular."+nameSingular);
-			this.namePlural = new TranslatableText("misc.hidearmor.plural."+namePlural);
+			this.nameSingular = Text.translatable("misc.hidearmor.singular."+nameSingular);
+			this.namePlural = Text.translatable("misc.hidearmor.plural."+namePlural);
 		}
 		
 	}
-	
+
 }
