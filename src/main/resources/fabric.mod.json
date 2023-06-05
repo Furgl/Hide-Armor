@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "hidearmor",
+  "version": "2.6.0",
+
+  "name": "Hide Armor",
+  "description": "Allows you to hide your armor and/or other player's armor!",
+  "authors": [
+    "Furgl"
+  ],
+  "contact": {
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/hide-armor",
+    "issues": "https://github.com/Furgl/Hide-Armor/issues",
+    "sources": "https://github.com/Furgl/Hide-Armor"
+  },
+
+  "license": "The MIT License (MIT)",
+  "icon": "assets/hidearmor/hide_armor_logo.png",
+
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "furgl.hideArmor.HideArmor"
+    ],
+    "modmenu": [
+        "furgl.hideArmor.config.ModMenuIntegration"
+    ]
+  },
+  "mixins": [
+    "hidearmor.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.14.6",
+    "fabric": "*",
+    "minecraft": "~1.19",
+    "java": ">=17"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}

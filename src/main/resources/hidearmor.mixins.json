@@ -1,0 +1,18 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "furgl.hideArmor.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+  ],
+  "client": [
+    "RenderArmorMixin",
+    "RenderGuiMixin",
+    "KeyBindMixin",
+    "ElytraFeatureRendererMixin",
+    "HeadFeatureRendererMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
